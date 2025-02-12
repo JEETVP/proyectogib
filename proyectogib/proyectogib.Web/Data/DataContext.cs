@@ -1,0 +1,20 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using proyectogib.Shared.Entities;
+
+namespace proyectogib.Web.Data
+{
+    public class DataContext : DbContext
+    {
+        public DbSet <City> cities { get; set; }
+        public DataContext(DbContextOptions <DataContext> options): base(options) 
+        {
+            
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<City>().HasIndex(X => X.Name).IsUnique();
+        }
+    }
+}
